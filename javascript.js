@@ -9,11 +9,14 @@ const scissors = "Scissors";
     let computerChoice = parseInt(Math.random() * 10);
 function getComputerChoice(){ 
     if(computerChoice <= 3){
+        let computerChoice = rock;
         return rock;
     }
     else if(computerChoice <=7){
+        let computerChoice = scissors
         return scissors;
     } else if(computerChoice <=10) {
+        let computerChoice = paper;
         return paper;
     }
 }
@@ -40,16 +43,30 @@ console.log(getHumanChoice());
 // Write the score system for both player and the computer (for everytime one of them has a point).
 let humanScore = 0;
 let computerScore = 0;
-// Write a function to play a round and declare a winner for each round (ongoing right now)
+// Write a function to play a round and declare a winner for each round (while making all the string values true) (solved) 
 function playRound(humanChoice, computerChoice){
-    rockPaperScissors(rock, paper, scissors);
-    if (computerChoice > humanChoice && humanChoice < computerChoice) {
-        alert ("Damn, that computer got a point for that");
-    } else if (humanChoice > computerChoice && computerChoice < humanChoice){
-        alert ("Good Job, you got a point for that, keep going to beating that dumb computer");
+    if (humanChoice === computerChoice){
+        alert("No points for either of you.");
+    } else if ((humanChoice === rock) && (computerChoice === scissors)){
+        alert("Good Job, you got a point from that dumb computer!");
+        humanScore++;
+    } else if ((humanChoice === scissors) && (computerChoice === rock)){
+        alert ("Damn, that computer got a point from you.");
+        computerScore++;
+    } else if ((humanChoice === paper) && (computerChoice=== rock)){
+        alert ("Good Job, you got a point from that dumb computer!");
+        humanScore++;
+    } else if ((humanChoice === rock) && (computerChoice === paper)){
+        alert("Damn, that computer got a point from you.");
+        computerScore++;
+    } else if (humanChoice > computerChoice){
+        alert("Good Job, you got a point from that dumb computer!");
+        humanScore++;
     } else {
-        alert ("No points for either of you");
-}
+        alert("Damn, that computer got a point from you.");
+        computerScore++;
+    }
+
 }
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
@@ -61,8 +78,8 @@ function playGame(){
 }
 // Write a function that knows which weapon is better (Paper > Rock, Rock > Scissors, Scissors > Paper).
 
-function rockPaperScissors(rock, paper, scissors){
-    if (rock > scissors || scissors > paper || paper > rock){
+function rockPaperScissors(){
+    if (rock < scissors && scissors > paper && paper < rock){
         return true;
     } else {
         return false;
